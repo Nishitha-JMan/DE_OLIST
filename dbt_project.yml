@@ -41,3 +41,15 @@ models:
       +materialized: table
       +description: "Transform models for Olist data"
       +schema: transform
+    
+    mart:
+      +materialized: table
+      +description: "Mart models for Olist data"
+      +schema: mart
+
+    snapshots:
+    - path: snapshots
+      config:
+        target_schema: snapshots
+
+

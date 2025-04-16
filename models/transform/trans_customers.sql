@@ -1,12 +1,11 @@
 with customers as (
-    select * from {{ ref('stg_customers') }}
+    select *
+    from {{ ref('stg_customers') }}
+    where customer_unique_id is not null
 ),
 geolocation as (
-    select
-        zip_code_prefix,
-        latitude,
-        longitude
-    from {{ ref('stg_geolocation') }}
+    select *
+    from {{ ref('deduplicated_geolocation') }}
 ),
 enriched_customers as (
     select
@@ -16,7 +15,7 @@ enriched_customers as (
         g.latitude,
         g.longitude,
         c.city,
-        c.states
+        c.states 
     from customers c
     left join geolocation g
     on c.zip_code_prefix = g.zip_code_prefix

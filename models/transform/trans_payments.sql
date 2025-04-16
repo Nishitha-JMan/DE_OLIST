@@ -6,8 +6,10 @@ transformed_payments as (
         order_id,
         payment_type,
         sum(payment_value) as total_payment_value,
-        count(payment_sequence) as payment_count
+        count(payment_sequence) as payment_count,
+        installments,
     from payments
-    group by order_id, payment_type order by payment_count desc
+    group by order_id, payment_type,installments order by payment_count desc
 )
 select * from transformed_payments
+

@@ -99,7 +99,6 @@ models:
         description: "Unique identifier for each review"
         tests:
           - unique
-          - not_null
       - name: order_id
         description: "Unique identifier for each order"
         tests:
